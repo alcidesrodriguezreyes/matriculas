@@ -22,6 +22,6 @@ class m160410_061754_create_matriculas_table extends Migration
 
     public function down()
     {
-        $this->dropTable('matriculas_table');
+        $this->dropTable('matriculas');
     }
 }

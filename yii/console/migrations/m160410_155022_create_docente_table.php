@@ -24,6 +24,6 @@ class m160410_155022_create_docente_table extends Migration
 
     public function down()
     {
-        $this->dropTable('docente_table');
+        $this->dropTable('docente');
     }
 }
