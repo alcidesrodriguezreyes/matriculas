@@ -8,7 +8,7 @@ use Yii;
  * This is the model class for table "estudiante".
  *
  * @property integer $idestudiante
- * @property string $tipo_identificacion
+ * @property integer $tipo_identificacion
  * @property string $identificacion
  * @property string $nombres
  * @property string $apellidos
@@ -20,7 +20,8 @@ use Yii;
  * @property string $creado_en
  * @property integer $activo
  *
- * @property Matricula[] $matriculas
+ * @property ClaseHasEstudiante[] $claseHasEstudiantes
+ * @property Clase[] $claseIdclases
  */
 class Estudiante extends \yii\db\ActiveRecord
 {
@@ -38,12 +39,12 @@ class Estudiante extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['creado_por', 'activo'], 'integer'],
+            [['tipo_identificacion', 'identificacion', 'nombres', 'apellidos', 'direccion', 'telefono', 'celular', 'email', 'creado_por'], 'required'],
+            [['tipo_identificacion', 'creado_por', 'activo'], 'integer'],
             [['creado_en'], 'safe'],
-            [['tipo_identificacion', 'identificacion', 'nombres', 'apellidos', 'direccion', 'telefono', 'celular'], 'string', 'max' => 45],
-            [['email'], 'string', 'max' => 200],
-            [['email'], 'unique'],
+            [['identificacion', 'nombres', 'apellidos', 'direccion', 'telefono', 'celular', 'email'], 'string', 'max' => 255],
             [['identificacion'], 'unique'],
+            [['email'], 'unique'],
         ];
     }
 
@@ -71,8 +72,16 @@ class Estudiante extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getMatriculas()
+    public function getClaseHasEstudiantes()
     {
-        return $this->hasMany(Matricula::className(), ['estudiante_idestudiante' => 'idestudiante']);
+        return $this->hasMany(ClaseHasEstudiante::className(), ['estudiante_idestudiante' => 'idestudiante']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getClaseIdclases()
+    {
+        return $this->hasMany(Clase::className(), ['idclase' => 'clase_idclase'])->viaTable('clase_has_estudiante', ['estudiante_idestudiante' => 'idestudiante']);
     }
 }

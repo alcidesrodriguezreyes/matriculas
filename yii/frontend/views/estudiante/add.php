@@ -19,6 +19,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'apellidos'); ?>
 
+    <div class="form-group">
+        <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
+    </div>
+
 
   </div>
 </div>
