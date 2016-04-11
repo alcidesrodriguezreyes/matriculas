@@ -40,8 +40,8 @@ class m160411_024703_create_clase_has_estudiante extends Migration
 
     public function safeDown()
     {
-      $this->dropForeignKey('fk_clase_has_estudiante_clase1');
-      $this->dropForeignKey('fk_clase_has_estudiante_estudiante1');
+      $this->dropForeignKey('fk_clase_has_estudiante_clase1', 'clase_has_estudiante');
+      $this->dropForeignKey('fk_clase_has_estudiante_estudiante1', 'clase_has_estudiante');
       $this->dropTable('clase_has_estudiante');
     }
 }
