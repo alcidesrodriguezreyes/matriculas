@@ -41,7 +41,8 @@ class EstudianteController extends \yii\web\Controller
         ],
         'sort' => [
             'defaultOrder' => [
-                'created_en' => SORT_DESC,
+                //'created_en' => SORT_DESC,
+                'apellidos' => SORT_ASC,
                 'nombres' => SORT_ASC,
             ]
         ],
@@ -51,9 +52,45 @@ class EstudianteController extends \yii\web\Controller
         ]);
     }
 
-    public function actionUpdate()
+    /**
+     * Displays a single Estudiante model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionView($id)
     {
-        return $this->render('update');
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+
+    public function actionUpdate($id)
+    {
+      $model = $this->findModel($id);
+
+      if ($model->load(Yii::$app->request->post()) && $model->save()) {
+          return $this->redirect(['view', 'id' => $model->idestudiante]);
+      } else {
+          return $this->render('update', [
+              'model' => $model,
+          ]);
+      }
+    }
+
+    /**
+     * Finds the Estudiante model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Estudiante the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = Estudiante::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
     }
 
 }
