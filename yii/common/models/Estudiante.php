@@ -25,6 +25,15 @@ use Yii;
  */
 class Estudiante extends \yii\db\ActiveRecord
 {
+  const SCENARIO_ADD = 'add';
+
+  public function scenarios()
+  {
+      $scenarios = parent::scenarios();
+      $scenarios[self::SCENARIO_ADD] = ['tipo_identificacion', 'identificacion', 'nombres', 'apellidos', 'direccion', 'celular', 'email', 'creado_por'];
+      return $scenarios;
+  }
+
     /**
      * @inheritdoc
      */
@@ -39,8 +48,9 @@ class Estudiante extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['tipo_identificacion', 'identificacion', 'nombres', 'apellidos', 'direccion', 'telefono', 'celular', 'email', 'creado_por'], 'required'],
-            [['tipo_identificacion', 'creado_por', 'activo'], 'integer'],
+            [['tipo_identificacion', 'identificacion', 'nombres', 'apellidos', 'direccion', 'celular', 'email', 'creado_por'], 'required', 'on' => self::SCENARIO_ADD],
+            ['email', 'email'],
+            [['tipo_identificacion', 'creado_por', 'activo', 'telefono', 'celular'], 'integer'],
             [['creado_en'], 'safe'],
             [['identificacion', 'nombres', 'apellidos', 'direccion', 'telefono', 'celular', 'email'], 'string', 'max' => 255],
             [['identificacion'], 'unique'],
@@ -55,7 +65,7 @@ class Estudiante extends \yii\db\ActiveRecord
     {
         return [
             'idestudiante' => 'Idestudiante',
-            'tipo_identificacion' => 'Tipo Identificacion',
+            'tipo_identificacion' => 'Tipo de documento',
             'identificacion' => 'Identificacion',
             'nombres' => 'Nombres',
             'apellidos' => 'Apellidos',

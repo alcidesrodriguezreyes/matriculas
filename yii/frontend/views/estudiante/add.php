@@ -7,23 +7,37 @@ use yii\widgets\ActiveForm;
 <h1>estudiante/add</h1>
 
 <div class="row">
-  <div class="col-lg-5">
+  <div class="col-lg-4">
     hola
   </div>
-  <div class="col-lg-7">
-    <?php $form = ActiveForm::begin();?>
+  <div class="col-lg-8">
+    <div class="row">
+      <?php $form = ActiveForm::begin();?>
+      <div class="col-lg-6">
+        <?= $form->field($model, 'tipo_identificacion')->dropdownList(['1'=>'cédula'],['prompt'=>'Tipo de documento', 'options'=>['1'=>['selected'=>true]]]); ?>
 
-    <?= $form->field($model, 'identificacion'); ?>
+        <?= $form->field($model, 'identificacion')->textInput(['autofocus'=>true]); ?>
 
-    <?= $form->field($model, 'nombres'); ?>
+        <?= $form->field($model, 'nombres'); ?>
 
-    <?= $form->field($model, 'apellidos'); ?>
+        <?= $form->field($model, 'apellidos'); ?>
+      </div>
+      <div class="col-lg-6">
+        <?= $form->field($model, 'email'); ?>
 
-    <div class="form-group">
-        <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
+        <?= $form->field($model, 'direccion'); ?>
+
+        <?= $form->field($model, 'telefono'); ?>
+
+        <?= $form->field($model, 'celular'); ?>
+      </div>
+      <div class="col-lg-12">
+        <div class="form-group">
+            <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
+        </div>
+      </div>
+      <?php $form = ActiveForm::begin();?>
     </div>
-
-
   </div>
 </div>
 
