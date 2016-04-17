@@ -6,9 +6,6 @@ use yii\widgets\ActiveForm;
 <h1>estudiante/update</h1>
 
 <div class="row">
-  <div class="col-lg-4">
-    hola
-  </div>
   <div class="col-lg-8">
     <div class="row">
       <?php $form = ActiveForm::begin();?>

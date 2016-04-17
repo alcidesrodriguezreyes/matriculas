@@ -9,19 +9,15 @@ use yii\helpers\Html;
 echo GridView::widget([
     'dataProvider' => $dataProvider,
     'columns' => [
-      [
-        'class' => 'yii\grid\ActionColumn',
-        'buttons' => [
-          'update' => function ($url, $model, $key) {
-            return Html::a('Update', $url);
-          }
-        ]
-      ],
       'identificacion',
       'nombres',
       'apellidos',
       'email',
-      'creado_en:datetime'
+      'creado_en:datetime',
+      [
+        'class' => 'yii\grid\ActionColumn',
+        
+      ],
     ]
 ]);
 ?>
