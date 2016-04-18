@@ -33,6 +33,9 @@ AppAsset::register($this);
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
+        'innerContainerOptions' => [
+          'class' => 'container-fluid'
+        ]
     ]);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
@@ -59,12 +62,41 @@ AppAsset::register($this);
     NavBar::end();
     ?>
 
-    <div class="container">
+    <div class="container-fluid">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
-        <?= $content ?>
+        <div class="row">
+          <div class="col-lg-2 trunk-slide-bar">
+            <?php
+              echo Nav::widget([
+                'items' => [
+                  [
+                    'label' => 'Home',
+                    'url' => ['site/index'],
+                  ],
+                  [
+                    'label' => 'Estudiantes',
+                    'url' => ['estudiante/index']
+                  ],
+                  [
+                    'label' => 'Login',
+                    'url' => ['site/login'],
+                    'visible' => Yii::$app->user->isGuest
+                  ],
+                ],
+                'options' => [
+                  //'class' =>'nav-pills'
+                ], // set this to nav-tab to get tab-styled navigation
+              ]);
+            ?>
+          </div>
+          <div class="col-lg-10 main-content">
+            <?= $content ?>
+          </div>
+        </div>
+
     </div>
 </div>
 
